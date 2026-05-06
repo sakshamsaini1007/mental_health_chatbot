@@ -12,17 +12,17 @@ st.set_page_config(page_title = "Mental Health Chatbot")
 #bin_str = get_base64("background.png")
 
 
-st.markdown(f"""
-        <style>
-            .main{{
-            background-image:url("data:image/png;base64,{bin_str}");
-            background-style: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+#st.markdown(f"""
+#        <style>
+#            .main{{
+#            background-image:url("data:image/png;base64,{bin_str}");
+#            background-style: cover;
+#            background-position: center;
+#            background-repeat: no-repeat;
 
-            }}
-        </style>
-        """,unsafe_allow_html = True)
+#            }}
+#        </style>
+#        """,unsafe_allow_html = True)
 
 st.session_state.setdefault('conversation_history',[])
 
