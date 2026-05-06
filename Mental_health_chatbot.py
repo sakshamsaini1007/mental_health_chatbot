@@ -4,12 +4,12 @@ import base64
 
 st.set_page_config(page_title = "Mental Health Chatbot")
 
-def get_base64(background):
-    with open(background,"rb") as f:
-        data = f.read()
-    return base64.b64encode(data).decode()
+#def get_base64(background):
+#    with open(background,"rb") as f:
+#        data = f.read()
+#    return base64.b64encode(data).decode()
 
-bin_str = get_base64("background.png")
+#bin_str = get_base64("background.png")
 
 
 st.markdown(f"""
