@@ -1,6 +1,7 @@
 import streamlit as st
-import ollama
+from groq import Groq
 import base64
+import os
 
 st.set_page_config(page_title = "Mental Health Chatbot")
 
@@ -27,24 +28,53 @@ st.set_page_config(page_title = "Mental Health Chatbot")
 st.session_state.setdefault('conversation_history',[])
 
 def generate_response(user_input):
-    st.session_state['conversation_history'].append({"role":"user", "content":user_input})
 
-    response = ollama.chat(model = "llama3.1:8b",messages = st.session_state['conversation_history'])
-    ai_response = response['message']['content']
+    client = Groq(api_key="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")
 
-    st.session_state['conversation_history'].append({"role":"assistant", "content":ai_response})
-    return ai_response
+    chat_completion = client.chat.completions.create(
+        messages=[
+            {
+                "role": "user",
+                "content": user_input,
+            }
+        ],
+        model="llama-3.1-8b-instant",
+    )
+
+    return chat_completion.choices[0].message.content
+
 
 def generate_affirmation():
     prompt = "provide a positive affirmation to encourage someone who is feeling \n            stressed or overwhelmed"
-    response = ollama.chat(model="llama3.1:8b",messages=[{"role":"user","content":prompt}])
-    return response['message']['content']
+    client = Groq(api_key="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")
+
+    chat_completion = client.chat.completions.create(
+        messages=[
+            {
+                "role": "user",
+                "content": user_message,
+            }
+        ],
+        model="llama-3.1-8b-instant",
+    )
+
+    return chat_completion.choices[0].message.content
 
 def generate_meditation_guide():
     prompt = "Provide a 5-min guided meditation script to help someone relax and \n reduce     stress"
-    response = ollama.chat(model="llama3.1:8b",messages=[{"role":"user","content":prompt}])
-    return response['message']['content']
+    client = Groq(api_key="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")
 
+    chat_completion = client.chat.completions.create(
+        messages=[
+            {
+                "role": "user",
+                "content": user_message,
+            }
+        ],
+        model="llama-3.1-8b-instant",
+    )
+
+    return chat_completion.choices[0].message.content
 
 st.title("Mental Health Support Agent")
 
@@ -54,10 +84,10 @@ for msg in st.session_state['conversation_history']:
 
 user_message = st.text_input("How can I help you today?")
 
-if user_message:
-    with st.spinner("Thinking...."):
-        ai_response = generate_response(user_message)
-        st.markdown(f"**AI:** {ai_response}")
+#if user_message:
+#    with st.spinner("Thinking...."):
+#        ai_response = generate_response(user_message)
+#        st.markdown(f"**AI:** {ai_response}")
 
 col1 , col2 = st.columns(2)
 
