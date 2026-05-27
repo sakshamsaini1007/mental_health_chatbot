@@ -30,7 +30,7 @@ st.session_state.setdefault('conversation_history',[])
 def generate_response(user_input):
 
     client = Groq(
-    api_key=os.getenv("mental health chatbot API KEY"))
+    api_key=os.environ.get("mental health chatbot API KEY"))
 
     chat_completion = client.chat.completions.create(
         messages=[
@@ -48,7 +48,7 @@ def generate_response(user_input):
 def generate_affirmation():
     prompt = "provide a positive affirmation to encourage someone who is feeling \n            stressed or overwhelmed"
     client = Groq(
-    api_key=os.getenv("mental health chatbot API KEY"))
+    api_key=os.environ.get("mental health chatbot API KEY"))
 
     chat_completion = client.chat.completions.create(
         messages=[
@@ -65,7 +65,7 @@ def generate_affirmation():
 def generate_meditation_guide():
     prompt = "Provide a 5-min guided meditation script to help someone relax and \n reduce     stress"
     client = Groq(
-    api_key=os.getenv("mental health chatbot API KEY"))
+    api_key=os.environ.get("mental health chatbot API KEY"))
 
 
     chat_completion = client.chat.completions.create(
